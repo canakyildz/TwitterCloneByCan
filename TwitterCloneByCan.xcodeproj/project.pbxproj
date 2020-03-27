@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1883164F242D52BB007BBB25 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1883164E242D52BB007BBB25 /* EditProfileVC.swift */; };
+		18831651242D53FC007BBB25 /* EditProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18831650242D53FC007BBB25 /* EditProfileHeader.swift */; };
+		18831653242D59B5007BBB25 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18831652242D59B5007BBB25 /* EditProfileViewModel.swift */; };
+		18831655242D5A6A007BBB25 /* EditProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18831654242D5A6A007BBB25 /* EditProfileCell.swift */; };
+		18831657242D621B007BBB25 /* InputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18831656242D621B007BBB25 /* InputTextView.swift */; };
 		189CC5902423E935004971F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189CC58F2423E935004971F5 /* AppDelegate.swift */; };
 		189CC5922423E935004971F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189CC5912423E935004971F5 /* SceneDelegate.swift */; };
 		189CC5942423E935004971F5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189CC5932423E935004971F5 /* ViewController.swift */; };
@@ -53,6 +58,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1883164E242D52BB007BBB25 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
+		18831650242D53FC007BBB25 /* EditProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileHeader.swift; sourceTree = "<group>"; };
+		18831652242D59B5007BBB25 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
+		18831654242D5A6A007BBB25 /* EditProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileCell.swift; sourceTree = "<group>"; };
+		18831656242D621B007BBB25 /* InputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
 		189CC58C2423E935004971F5 /* Twitter Clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Twitter Clone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		189CC58F2423E935004971F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		189CC5912423E935004971F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -175,6 +185,9 @@
 				18A6A0EA2427F12400EA8A7A /* TweetHeader.swift */,
 				18A6A0F02428F5C800EA8A7A /* ActionSheetCell.swift */,
 				18A6A0F8242A584400EA8A7A /* NotificationCell.swift */,
+				18831654242D5A6A007BBB25 /* EditProfileCell.swift */,
+				18831650242D53FC007BBB25 /* EditProfileHeader.swift */,
+				18831656242D621B007BBB25 /* InputTextView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -191,6 +204,7 @@
 				189CC5C82424E712004971F5 /* UploadTweetController.swift */,
 				189CC5D524255BB2004971F5 /* ProfileVC.swift */,
 				18A6A0E82427EF6F00EA8A7A /* TweetController.swift */,
+				1883164E242D52BB007BBB25 /* EditProfileVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -234,6 +248,7 @@
 				18A6A0EC242812D200EA8A7A /* UploadTweetViewModel.swift */,
 				18A6A0F22428FB8100EA8A7A /* ActionSheetViewModel.swift */,
 				18A6A0FA242A66EA00EA8A7A /* NotificationViewModel.swift */,
+				18831652242D59B5007BBB25 /* EditProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -373,12 +388,15 @@
 			files = (
 				189CC5B52423EB15004971F5 /* FeedVC.swift in Sources */,
 				189CC5D624255BB2004971F5 /* ProfileVC.swift in Sources */,
+				18831651242D53FC007BBB25 /* EditProfileHeader.swift in Sources */,
 				189CC5CD2424FC45004971F5 /* TweetService.swift in Sources */,
 				189CC5AC2423E986004971F5 /* Constants.swift in Sources */,
 				18A6A0F7242A4DA200EA8A7A /* NotificationService.swift in Sources */,
 				189CC5B72423EB49004971F5 /* ExploreVC.swift in Sources */,
 				189CC5942423E935004971F5 /* ViewController.swift in Sources */,
 				189CC5C92424E712004971F5 /* UploadTweetController.swift in Sources */,
+				18831655242D5A6A007BBB25 /* EditProfileCell.swift in Sources */,
+				18831657242D621B007BBB25 /* InputTextView.swift in Sources */,
 				18A6A0F12428F5C800EA8A7A /* ActionSheetCell.swift in Sources */,
 				189CC5C72424C36E004971F5 /* User.swift in Sources */,
 				189CC5DA24257474004971F5 /* ProfileFilterView.swift in Sources */,
@@ -396,8 +414,10 @@
 				18A6A0E92427EF6F00EA8A7A /* TweetController.swift in Sources */,
 				189CC5B12423E9A2004971F5 /* RegisterVC.swift in Sources */,
 				18A6A0E52426C8B000EA8A7A /* UserCell.swift in Sources */,
+				1883164F242D52BB007BBB25 /* EditProfileVC.swift in Sources */,
 				189CC5922423E935004971F5 /* SceneDelegate.swift in Sources */,
 				189CC5D124250BBA004971F5 /* TweetCell.swift in Sources */,
+				18831653242D59B5007BBB25 /* EditProfileViewModel.swift in Sources */,
 				189CC5A92423E970004971F5 /* Extensions.swift in Sources */,
 				189CC5C52424BC6B004971F5 /* UserService.swift in Sources */,
 				189CC5B32423E9DD004971F5 /* MainTabVC.swift in Sources */,

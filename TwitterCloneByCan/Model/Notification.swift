@@ -24,7 +24,7 @@ struct Notification {
     var type: NotificationType!
     
     
-    init(user: User,dictionary: [String: AnyObject]) {
+    init(user: User,dictionary: [String: AnyObject]) {
         self.user = user
                 
         if let tweetID = dictionary["tweedID"] as? String {

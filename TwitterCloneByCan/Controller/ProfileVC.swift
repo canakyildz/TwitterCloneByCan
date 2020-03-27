@@ -114,7 +114,7 @@ class ProfileVC: UICollectionViewController {
         //setting our profileheader for profile controller , now we need to render out this header down here under extension.
         collectionView.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
         
-        guard let tabHeight = tabBarController?.tabBar.frame.height else { return }
+        guard let tabHeight = tabBarController?.tabBar.frame.height else { return }
         collectionView.contentInset.bottom = tabHeight
     }
     
@@ -143,6 +143,11 @@ extension ProfileVC {
         header.user = user
         header.delegate = self //we can say self because we conformed to that protocol down there with an extension
         return header
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let controller = TweetController(tweet: currentDataSource[indexPath.row])
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 
@@ -173,7 +178,11 @@ extension ProfileVC: ProfileHeaderDelegate {
     func handleEditProfileFollow(_ header: ProfileHeader) {
         
         if user.isCurrentUser {
-            print("show edit profile controller")
+            let controller = EditProfileVC(user: user) //already initted our profilevc with a user.if user's currentuser, we can pass that user.
+            controller.delegate = self
+            let nav = UINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true, completion: nil)
             return
         }
         
@@ -194,5 +203,15 @@ extension ProfileVC: ProfileHeaderDelegate {
     
     func handleDismissal() {
         navigationController?.popToRootViewController(animated: true)
+    }
+}
+
+// MARK: - EditProfileControllerDelegate
+
+extension ProfileVC: EditProfileControllerDelegate {
+    func controller(_ controller: EditProfileVC, wantsToUpdate user: User) {
+        controller.dismiss(animated: true, completion: nil)
+        self.user = user
+        self.collectionView.reloadData()
     }
 }

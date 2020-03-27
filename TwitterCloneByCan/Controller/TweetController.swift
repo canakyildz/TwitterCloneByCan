@@ -48,6 +48,12 @@ class TweetController: UICollectionViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.barStyle = .default
+    }
+    
     // MARK: - API
     
     func fetchReplies() {
@@ -115,7 +121,12 @@ extension TweetController {
 // MARK: - TweetHeaderDelegate
 
 extension TweetController: TweetHeaderDelegate {
-    
+  func handleFetchUser(withUsername username: String) {
+    UserService.shared.fetchUser(withUsername: username) { user in
+        let controller = ProfileVC(user: user)
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+}
     
     func showActionSheet() {
         
@@ -126,15 +137,9 @@ extension TweetController: TweetHeaderDelegate {
                 var user = self.tweet.user
                 user.isFollowed = isFollowed
                 self.showActionSheet(forUser: user)
-                
-                
-
             }
         }
-        
     }
-    
-    
 }
 
 // MARK: - ActionSheetLauncherDelegate

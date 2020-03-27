@@ -64,10 +64,24 @@ struct TweetViewModel {
         return UIImage(named: imageName)!
     }
     
+    var shouldHideReplyLabel: Bool {
+        return !tweet.isReply //if tweet is reply, we dont want to hide it.
+    }
+    
+    var replyText: String? {
+        guard let replyingToUsername = tweet.replyingTo else { return nil }
+        return " replying to @\(replyingToUsername)"
+    }
+    
+    // MARK: - Lifecycle
+    
     init(tweet: Tweet) {
         self.tweet = tweet
         self.user = tweet.user
     }
+    
+    
+    // MARK: - Helpers
     
     //helper func so we make it fileprivate func
     fileprivate func attributedText(withValue value: Int, text: String) -> NSAttributedString {

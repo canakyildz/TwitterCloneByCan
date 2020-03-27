@@ -19,6 +19,8 @@ struct Tweet {
     var didLike = false
     var replyingTo: String?
     
+    var isReply: Bool { return replyingTo != nil} //a tweet is gonna be isReply if replyingTo is not equal to nil.
+    
     
     init(user: User,tweetID: String, dictionary: [String: Any]) {
         self.tweetID = tweetID

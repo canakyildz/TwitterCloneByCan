@@ -17,7 +17,7 @@ class NotificationsVC: UITableViewController {
 // MARK: - Properties
 
     private var notifications = [Notification]() {
-        didSet { tableView.reloadData() }
+        didSet { tableView.reloadData() }
     }
     
 // MARK: - Lifecycle

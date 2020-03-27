@@ -45,20 +45,33 @@ class FeedVC: UICollectionViewController {
     // MARK: - API
     
     func fetchTweets() {
+        collectionView.refreshControl?.beginRefreshing()
+
         TweetService.shared.fetchTweets { (tweets) in
-            self.tweets = tweets
-            self.checkIfUserLikedTweets(tweets)
+            self.tweets = tweets.sorted(by: { $0.timestamp > $1.timestamp })
+            self.checkIfUserLikedTweets()
+
+            self.collectionView.refreshControl?.endRefreshing()
+            
+            
+            // self.tweets = tweets.sorted(by: { (tweet1, tweet2) -> Bool in
+            // return tweet1.timestamp > tweet2.timestamp
             
             
         }  }
     
-    func checkIfUserLikedTweets(_ tweets: [Tweet]) {
-        for (index, tweet) in tweets.enumerated() { //used this index and .enumarated() guy, when you use tweets.enumerated();you get access to index that you are on each iteration of your for loop.If you are on third iteration of my for loop,we keep iteration in this index property.
+    func checkIfUserLikedTweets() {
+        self.tweets.forEach { (tweet) in
             TweetService.shared.checkIfUserLikedTweet(tweet) { (didLike) in
                 guard didLike == true else { return } //if they didnt like the tweet we dont want to do anything.
                 
-                self.tweets[index].didLike = true //and while checking whats up,we are updating this index by setting tweets variable (didset) and reloading our collectiondata and then cellforitemat 
-            }
+                if let index = self.tweets.firstIndex(where: { $0.tweetID == tweet.tweetID }) { //find me the tweet where that tweetid is equal to tweetID of iteration we are on.
+                    self.tweets[index].didLike = true
+                }
+                //we are inside of a for loop. it's gonna loop through each one of our tweets. then it's gonna check and see if user liked the tweet. we have didlike inside and we make sure didlike is true before we go any further. and then we need to go and modify the datasource inside of our code. we need to find the index of tweet that has been liked.
+                //firstly it fetchtweets then we sort tweets and then we check if user liked the tweet. so it goes to check if user liked the tweet then it checks didLike, it checkes it's false then it goes back to next iteration of the loop,second tweet it's gonna say check and see if user liked the tweet it comes out as true and goes to if let index = ... line. SO now we need to update tweet. we go to var tweet array up at properties. we find the tweet thats been liekd and update it ($0.tweetID == tweet.tweetID }) { //find me the tweet where that tweetid is equal to tweetID of iteration we are on. So at this line firstindex guy will find that tweet.). it's gonna be stored in index property and we will be able to modify our datasource with that index array as liked.
+            
+        }
         }
     }
     
@@ -70,6 +83,11 @@ class FeedVC: UICollectionViewController {
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
     }
+    
+    @objc func handleRefresh() {
+        fetchTweets()
+    }
+    
     
     // MARK: - Helpers
         
@@ -83,6 +101,10 @@ class FeedVC: UICollectionViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.setDimensions(width: 44, height: 44)
         navigationItem.titleView = imageView
+        
+        let refreshControl = UIRefreshControl()
+        collectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         
         
     }
@@ -141,6 +163,13 @@ extension FeedVC: UICollectionViewDelegateFlowLayout {
 }
 
 extension FeedVC: TweetCellDelegate {
+    func handleFetchUser(withUsername username: String) {
+        UserService.shared.fetchUser(withUsername: username) { (user) in
+            let controller = ProfileVC(user: user)
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
+    }
+    
     func handleLikeTapped(_ cell: TweetCell) {
         guard let tweet = cell.tweet else { return }
         TweetService.shared.likeTweet(tweet: tweet) { (err, ref) in
